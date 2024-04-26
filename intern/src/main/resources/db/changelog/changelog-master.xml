@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="25042024-create-user" author="Bekir Yildirim">
+        <createTable tableName="user" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk-user-id"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints unique="true" />
+            </column>
+            <column name="name" type="varchar(100)"> </column>
+            <column name="lastname" type="varchar(100)"> </column>
+            <column name="password" type="varchar(100)"> </column>
+            <column name="password-repeat" type="varchar(100)"> </column>
+        </createTable>
+        <addAutoIncrement tableName="user" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="26042024-create-action" author="Bekir Yildirim">
+        <createTable tableName="action" schemaName="public">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" primaryKeyName="pk-action-id"/>
+            </column>
+            <column name="date" type="datetime"> </column>
+            <column name="money" type="float"> </column>
+            <column name="type" type="varchar(50)"> </column>
+            <column name="description" type="varchar(250)"> </column>
+            <column name="user-id" type="bigint"> </column>
+        </createTable>
+        <addAutoIncrement tableName="action" columnName="id" columnDataType="bigint" startWith="500" incrementBy="1"/>
+    </changeSet>
+    
+    <changeSet id="26042024-add-fk" author="Bekir Yildirim">
+        <addForeignKeyConstraint
+                baseTableName="action" baseColumnNames="user-id" constraintName="fk-action-user"
+                referencedTableName="user" referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="26042024-add-column" author="Bekir Yildirim">
+        <addColumn tableName="user" schemaName="public">
+            <column name="balance" type="float"> </column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="26042024-drop-column" author="Bekir Yildirim">
+        <dropColumn tableName="user" schemaName="public">
+            <column name="password-repeat" />
+        </dropColumn>
+    </changeSet>
+</databaseChangeLog>

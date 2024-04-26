@@ -15,7 +15,7 @@
             <column name="name" type="varchar(100)"> </column>
             <column name="lastname" type="varchar(100)"> </column>
             <column name="password" type="varchar(100)"> </column>
-            <column name="password-repeat" type="varchar(100)"> </column>
+            <column name="balance" type="float"> </column>
         </createTable>
         <addAutoIncrement tableName="user" columnName="id" columnDataType="bigint" startWith="100" incrementBy="1"/>
     </changeSet>
@@ -41,15 +41,14 @@
         />
     </changeSet>
 
-    <changeSet id="26042024-add-column" author="Bekir Yildirim">
-        <addColumn tableName="user" schemaName="public">
-            <column name="balance" type="float"> </column>
-        </addColumn>
-    </changeSet>
 
-    <changeSet id="26042024-drop-column" author="Bekir Yildirim">
-        <dropColumn tableName="user" schemaName="public">
-            <column name="password-repeat" />
-        </dropColumn>
+    <changeSet id="26042024-insert-user" author="Bekir Yildirim">
+        <insert tableName="user">
+            <column name="email" value="abc@gmail.com"/>
+            <column name="name" value="deneme"/>
+            <column name="lastname" value="deneme"/>
+            <column name="balance" value="100" />
+            <column name="password" value="123.abc"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>

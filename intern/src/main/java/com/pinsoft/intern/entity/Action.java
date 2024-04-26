@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "action")
 public class Action {
 
     @Id
@@ -27,7 +26,7 @@ public class Action {
     private float money;
 
     @ManyToOne
-    @JoinColumn(name="user-id")
+    @JoinColumn(name="user_id")
     @JsonBackReference
     private User user;
 }

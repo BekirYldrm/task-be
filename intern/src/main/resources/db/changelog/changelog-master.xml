@@ -40,26 +40,4 @@
                 referencedTableName="user" referencedColumnNames="id"
         />
     </changeSet>
-
-    <changeSet id="26042024-insert-user" author="Bekir Yildirim">
-        <insert tableName="user">
-            <column name="id" value="1"/>
-            <column name="email" value="abc@gmail.com"/>
-            <column name="name" value="deneme"/>
-            <column name="lastname" value="deneme"/>
-            <column name="balance" value="100" />
-            <column name="password" value="123.abc"/>
-        </insert>
-    </changeSet>
-
-    <changeSet id="26042024-insert-action" author="Bekir Yildirim">
-        <insert tableName="action">
-            <column name="id" value="1" />
-            <column name="type" value="Income"/>
-            <column name="description" value="deneme123"/>
-            <column name="money" value="48"/>
-            <column name="user_id" value="1"/>
-        </insert>
-    </changeSet>
-
 </databaseChangeLog>

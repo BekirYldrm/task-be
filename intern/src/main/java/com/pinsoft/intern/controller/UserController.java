@@ -1,10 +1,11 @@
 package com.pinsoft.intern.controller;
 
+import com.pinsoft.intern.dto.LoginRequest;
+import com.pinsoft.intern.dto.RegisterRequest;
 import com.pinsoft.intern.entity.User;
 import com.pinsoft.intern.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,5 +18,20 @@ public class UserController {
     @GetMapping("/users")
     public List<User> get() {
         return  userService.getALl();
+    }
+
+    @GetMapping("/users/{id}")
+    public User findUser(@PathVariable Long id) {
+        return userService.getUser(id);
+    }
+
+    @PostMapping("/register")
+    public User addUser(@RequestBody RegisterRequest userRequest) {
+        return userService.saveUser(userRequest);
+    }
+
+    @PostMapping("/login")
+    public User loginUser(@RequestBody LoginRequest userRequest) {
+        return userService.findUser(userRequest);
     }
 }

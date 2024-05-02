@@ -2,6 +2,7 @@ package com.pinsoft.intern.service;
 
 
 import com.pinsoft.intern.dto.ActionRequest;
+import com.pinsoft.intern.dto.ActionUpdateRequest;
 import com.pinsoft.intern.entity.Action;
 import com.pinsoft.intern.entity.User;
 import com.pinsoft.intern.repository.ActionRepository;
@@ -47,9 +48,24 @@ public class ActionService {
                 userRepository.save(user);
             }
             return actionRepository.save(action);
+        }else{
+            throw new Exception("User is null!");
         }
 
-        throw new Exception("User is null!");
 
+
+    }
+
+    public Action updateAction(ActionUpdateRequest actionUpdateRequest) throws Exception {
+        Action action =actionRepository.findById(actionUpdateRequest.getId()).orElse(null);
+        if (action != null) {
+            action.setMoney(actionUpdateRequest.getMoney());
+            action.setDescription(actionUpdateRequest.getDescription());
+            action.setType(actionUpdateRequest.getType());
+            return actionRepository.save(action);
+        }
+        else{
+            throw new Exception("Action is null!");
+        }
     }
 }

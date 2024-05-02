@@ -2,6 +2,7 @@ package com.pinsoft.intern.controller;
 
 
 import com.pinsoft.intern.dto.ActionRequest;
+import com.pinsoft.intern.dto.ActionUpdateRequest;
 import com.pinsoft.intern.entity.Action;
 import com.pinsoft.intern.service.ActionService;
 import lombok.RequiredArgsConstructor;
@@ -28,5 +29,10 @@ public class ActionController {
     @PostMapping("/action")
     public Action createAction(@RequestBody ActionRequest actionRequest) throws Exception {
     return actionService.saveAction(actionRequest);
+    }
+
+    @PatchMapping("/action")
+    public Action updateAction(@RequestBody ActionUpdateRequest actionUpdateRequest) throws Exception {
+        return actionService.updateAction(actionUpdateRequest);
     }
 }

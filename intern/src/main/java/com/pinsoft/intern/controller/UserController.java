@@ -5,6 +5,7 @@ import com.pinsoft.intern.dto.RegisterRequest;
 import com.pinsoft.intern.entity.User;
 import com.pinsoft.intern.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public User loginUser(@RequestBody LoginRequest userRequest) {
+    public ResponseEntity<User> loginUser(@RequestBody LoginRequest userRequest) {
         return userService.findUser(userRequest);
     }
 }

@@ -5,9 +5,12 @@ import com.pinsoft.intern.dto.RegisterRequest;
 import com.pinsoft.intern.entity.User;
 import com.pinsoft.intern.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,11 +35,18 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findUser(LoginRequest userRequest) {
-        User user =  userRepository.findByEmail(userRequest.getEmail());
-        if(userRequest.getPassword().equals(user.getPassword())) {
-           return user;
+    public ResponseEntity<User> findUser(LoginRequest userRequest) {
+        Optional<User> user = Optional.ofNullable(userRepository.findByEmail(userRequest.getEmail()).orElse(null));
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(userRequest.getPassword())) {
+                return ResponseEntity.ok(user.get());
+            }
+            else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            }
         }
-        return null;
+        else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
